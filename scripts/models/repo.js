@@ -4,8 +4,13 @@
   reposObj.requestRepos = function(callback) {
     // NOTE: refactor this request into an $.get call
     $.when(
-     $.get('/github/users/noahgribbin'),
-     $.get('/github/users/noahgribbin/followers')
+     $.get('/github/users/noahgribbin/repos', function(data){
+       reposObj.allRepos = data;
+       console.log(data);
+     }),
+     $.get('/github/users/noahgribbin/followers', function(data){
+       reposObj.followers = data;
+     })
     ).done(callback);
   };
 
